@@ -3,20 +3,14 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 @ObjectType('Book')
 export class BookT {
   @Field(() => ID)
-  id: string;
+  id: number;
 
   @Field()
   title: string;
 
   @Field()
-  author: string;
+  author?: string;
 
   @Field()
-  description: string;
-
-  @Field()
-  createdAt: string;
-
-  @Field()
-  updatedAt: string;
+  description?: string;
 }
