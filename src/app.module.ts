@@ -7,6 +7,7 @@ import { BookModule } from './book/book.module';
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      playground: true,
     }),
     BookModule,
   ],
