@@ -1,14 +1,13 @@
 import { Query, Resolver } from '@nestjs/graphql';
 import { Book } from '../entities';
+import { BookService } from '../book.service';
 
 @Resolver((of) => Book)
 export class BookResolver {
-  @Query((returns) => Book)
+  constructor(private bookService: BookService) {}
+  @Query((returns) => [Book], { name: 'getAllBooks' })
   async book() {
-    return {
-      id: 1,
-      title: 'The Hobbit',
-      author: 'J.R.R. Tolkien',
-    };
+    const books = await this.bookService.findAll();
+    return books;
   }
 }

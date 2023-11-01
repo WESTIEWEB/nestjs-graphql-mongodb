@@ -1,17 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Book } from './entities';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class BookService {
-  findAll() {
-    return [
-      {
-        id: 1,
-        title: 'The Great Gatsby',
-      },
-      {
-        id: 2,
-        title: 'Nineteen Eighty-Four',
-      },
-    ];
+  constructor(
+    @InjectRepository(Book) private bookRepository: Repository<Book>,
+  ) {}
+  async findAll(): Promise<Book[]> {
+    return this.bookRepository.find();
   }
 }

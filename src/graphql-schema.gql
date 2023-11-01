@@ -3,10 +3,10 @@
 # ------------------------------------------------------
 
 type Book {
-  id: ID!
+  id: String!
   title: String!
   author: String!
-  description: String!
+  description: String
 }
 
 type User {
@@ -19,6 +19,6 @@ type User {
 }
 
 type Query {
-  book: Book!
+  getAllBooks: [Book!]!
   user: User!
 }
