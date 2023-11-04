@@ -2,23 +2,85 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  firstName: String
+  lastName: String
+  email: String!
+  phone: String!
+  password: String!
+  role: String!
+  books: [Book!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Book {
   id: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   title: String!
   author: String!
   description: String
+  user: User!
 }
 
-type User {
-  id: ID!
+type Admin {
+  id: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   firstName: String
   lastName: String
   email: String!
   password: String!
+  phone: String!
   role: String!
 }
 
 type Query {
   getAllBooks: [Book!]!
-  user: User!
+  AllUsers: [User!]!
+  getAllAdmin: [Admin!]!
+  findAdminById(adminId: String!): Admin!
+}
+
+type Mutation {
+  createBook(book: CreateBookDto!): Book!
+  createUser(user: CreateUserDto!): User!
+  createAdmin(admin: CreateAdminInput!): Admin!
+  updateAdmin(updateAdminInput: UpdateAdminInput!): Admin!
+  removeAdmin(adminId: String!): Admin!
+}
+
+input CreateBookDto {
+  title: String!
+  author: String!
+  description: String!
+}
+
+input CreateUserDto {
+  email: String!
+  phone: String!
+  password: String!
+}
+
+input CreateAdminInput {
+  email: String!
+  password: String!
+  phone: String!
+}
+
+input UpdateAdminInput {
+  email: String
+  password: String
+  phone: String
+  id: String!
+  firstName: String!
+  lastName: String!
+  role: String
 }

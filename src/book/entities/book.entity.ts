@@ -1,13 +1,11 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { CommonEntity } from 'src/common';
+import { User } from 'src/user/entities';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @ObjectType('Book')
 @Entity()
-export class Book {
-  @Field()
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class Book extends CommonEntity {
   @Field()
   @Column()
   title: string;
@@ -19,4 +17,9 @@ export class Book {
   @Field({ nullable: true })
   @Column({ nullable: true })
   description?: string;
+
+  @ManyToOne(() => User, (user) => user.books, { lazy: true })
+  @JoinColumn({ name: 'userId' })
+  @Field(() => User)
+  user: User;
 }
