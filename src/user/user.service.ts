@@ -19,4 +19,30 @@ export class UserService {
       select: ['id', 'firstName', 'lastName', 'phone', 'email', 'role'],
     });
   }
+
+  async findById(id: string): Promise<User> {
+    return this.userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['books'],
+      select: ['id', 'firstName', 'lastName', 'phone', 'email', 'role'],
+    });
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({
+      where: {
+        email,
+      },
+      relations: ['books'],
+      select: ['id', 'firstName', 'lastName', 'phone', 'email', 'role'],
+    });
+  }
+
+  async findByEmailOrThrow(email: string): Promise<User> {
+    return await this.userRepository.findOneByOrFail({
+      email: email,
+    });
+  }
 }

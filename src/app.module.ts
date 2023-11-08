@@ -10,12 +10,16 @@ import { AdminModule } from './admin/admin.module';
 import { Admin } from 'typeorm';
 import { Book } from './book/entities';
 import { User } from './user/entities';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
     BookModule,
     UserModule,
@@ -25,11 +29,12 @@ import { User } from './user/entities';
       port: 5432,
       username: 'postgres',
       password: '!2012Chisom',
-      database: 'fyyur',
+      database: 'swift-rider',
       entities: ['dist/**/*.entity.js'],
       synchronize: true,
     }),
     AdminModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

@@ -10,4 +10,7 @@ export class CreateBookDto {
 
   @Field()
   description?: string;
+
+  @Field()
+  userId: string;
 }

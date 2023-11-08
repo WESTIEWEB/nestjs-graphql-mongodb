@@ -9,7 +9,8 @@ type User {
   firstName: String
   lastName: String
   email: String!
-  phone: String!
+  phone: String
+  salt: String!
   password: String!
   role: String!
   books: [Book!]!
@@ -28,6 +29,7 @@ type Book {
   author: String!
   description: String
   user: User!
+  userId: String!
 }
 
 type Admin {
@@ -61,12 +63,15 @@ input CreateBookDto {
   title: String!
   author: String!
   description: String!
+  userId: String!
 }
 
 input CreateUserDto {
   email: String!
   phone: String!
   password: String!
+  role: String!
+  salt: String!
 }
 
 input CreateAdminInput {

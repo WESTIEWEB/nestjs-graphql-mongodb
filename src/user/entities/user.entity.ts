@@ -20,9 +20,13 @@ export class User extends CommonEntity {
   @Field()
   email: string;
 
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  phone: string;
+
   @Column()
   @Field()
-  phone: string;
+  salt: string;
 
   @Column()
   @Field()
@@ -33,6 +37,7 @@ export class User extends CommonEntity {
   role: USERROLE;
 
   @OneToMany(() => Book, (book) => book.user)
+  @JoinColumn({ name: 'userId' })
   @Field(() => [Book])
   books: Book[];
 }
