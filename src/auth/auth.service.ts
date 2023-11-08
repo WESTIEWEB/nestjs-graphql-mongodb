@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { DataSource, QueryRunner } from 'typeorm';
 // import { OAuth } from 'auth0';
 import { Profile } from 'passport-auth0';
